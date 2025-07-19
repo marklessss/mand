@@ -1,4 +1,4 @@
-import { ChevronDown, Menu, Plus } from 'lucide-react';
+import { ChevronDown, Menu, Plus, PanelLeftOpen, PanelLeftClose } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface ChatHeaderProps {
@@ -14,9 +14,13 @@ export function ChatHeader({ onMenuToggle, sidebarCollapsed }: ChatHeaderProps) 
           variant="ghost"
           size="sm"
           onClick={onMenuToggle}
-          className="lg:hidden"
+          className="hover:bg-accent/10 transition-all duration-200 hover:scale-105"
         >
-          <Menu className="w-4 h-4" />
+          {sidebarCollapsed ? (
+            <PanelLeftOpen className="w-4 h-4 text-accent" />
+          ) : (
+            <PanelLeftClose className="w-4 h-4" />
+          )}
         </Button>
         
         <div className="flex items-center gap-2">
