@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, MessageSquare, Plus, Search, Settings, User, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronDown, MessageSquare, Search, Settings, User, ChevronLeft, ChevronRight, Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -32,19 +32,65 @@ interface ChatSidebarProps {
 
 export function ChatSidebar({ collapsed, onToggle }: ChatSidebarProps) {
   const [selectedChat, setSelectedChat] = useState<string | null>(null);
+  const [isHovering, setIsHovering] = useState(false);
 
   return (
-    <div className={`${collapsed ? 'w-16' : 'w-80'} transition-all duration-300 ease-in-out bg-sidebar-gradient border-r border-sidebar-border flex flex-col h-full overflow-hidden relative shadow-lg`}>
-      {/* Header with New Chat Button */}
+    <div 
+      className={`${collapsed ? 'w-16' : 'w-80'} transition-all duration-300 ease-in-out bg-sidebar-gradient border-r border-sidebar-border flex flex-col h-full overflow-hidden relative shadow-lg`}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {/* Header with Mandaleen Brand */}
       <div className="p-4 border-b border-sidebar-border/50">
-        <Button
-          variant="outline"
-          className={`${collapsed ? 'w-8 h-8 p-0' : 'w-full'} justify-center ${collapsed ? '' : 'justify-start gap-3'} text-sm font-medium bg-sidebar-accent/80 text-sidebar-foreground border-sidebar-border/50 hover:bg-sidebar-accent hover:scale-[1.02] transition-all duration-300 shadow-sm backdrop-blur-sm`}
-          aria-label={collapsed ? "New chat" : undefined}
-        >
-          <Plus className="w-4 h-4 flex-shrink-0" />
-          {!collapsed && <span className="animate-fade-in font-medium">New chat</span>}
-        </Button>
+        <div className={`flex items-center ${collapsed ? 'justify-center' : 'justify-between'} transition-all duration-300`}>
+          {/* Robot Icon and Label */}
+          <div className={`flex items-center ${collapsed ? 'justify-center' : 'gap-3'} transition-all duration-300`}>
+            {collapsed ? (
+              /* Collapsed state: Robot icon that transforms to toggle on hover */
+              <div className="relative">
+                <Button
+                  onClick={isHovering ? onToggle : undefined}
+                  variant="ghost"
+                  className={`w-8 h-8 p-0 rounded-lg transition-all duration-300 ${
+                    isHovering 
+                      ? 'bg-sidebar-accent hover:bg-sidebar-accent/80 hover:scale-110' 
+                      : 'hover:bg-sidebar-accent/50'
+                  }`}
+                  aria-label={isHovering ? "Expand sidebar" : "Mandaleen AI"}
+                >
+                  {isHovering ? (
+                    <ChevronRight className="w-4 h-4 text-sidebar-foreground transition-all duration-300" />
+                  ) : (
+                    <Bot className="w-4 h-4 text-accent transition-all duration-300" />
+                  )}
+                </Button>
+              </div>
+            ) : (
+              /* Expanded state: Robot icon with label */
+              <>
+                <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center border border-accent/20">
+                  <Bot className="w-4 h-4 text-accent" />
+                </div>
+                <span className="text-lg font-semibold text-sidebar-foreground animate-fade-in">
+                  Mandaleen
+                </span>
+              </>
+            )}
+          </div>
+          
+          {/* Toggle Button - Only visible when expanded */}
+          {!collapsed && (
+            <Button
+              onClick={onToggle}
+              variant="ghost"
+              size="sm"
+              className="w-8 h-8 p-0 hover:bg-sidebar-accent/80 hover:scale-110 transition-all duration-300 rounded-lg"
+              aria-label="Collapse sidebar"
+            >
+              <ChevronLeft className="w-4 h-4 text-sidebar-foreground/60" />
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Search Section */}
@@ -110,23 +156,6 @@ export function ChatSidebar({ collapsed, onToggle }: ChatSidebarProps) {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Sidebar Toggle Button - Positioned inside sidebar on the right */}
-      <div className="absolute top-4 -right-3 z-10">
-        <Button
-          onClick={onToggle}
-          variant="outline"
-          size="sm"
-          className="w-6 h-6 p-0 bg-background border-sidebar-border shadow-md hover:shadow-lg hover:scale-110 transition-all duration-300 rounded-full"
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        >
-          {collapsed ? (
-            <ChevronRight className="w-3 h-3 text-foreground" />
-          ) : (
-            <ChevronLeft className="w-3 h-3 text-foreground" />
-          )}
-        </Button>
       </div>
 
       {/* User Profile */}
