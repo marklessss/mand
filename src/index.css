@@ -149,6 +149,7 @@
 /* Custom scrollbar styles */
 .scrollbar-thin {
   scrollbar-width: thin;
+  scrollbar-gutter: stable;
 }
 
 .scrollbar-thumb-sidebar-border {
@@ -161,22 +162,63 @@
 
 /* Webkit scrollbar styles for better browser support */
 .scrollbar-thin::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-track {
   background: transparent;
+  border-radius: 2px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb {
   background: hsl(var(--sidebar-border));
-  border-radius: 3px;
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--sidebar-accent));
 }
 
+/* Optimized conversation list styling */
+.conversation-item {
+  min-height: 56px; /* Ensures consistent height for better visual hierarchy */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.conversation-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Height optimization for laptop screens */
+@media screen and (max-height: 800px) {
+  .chat-interface-main {
+    padding: 1rem;
+  }
+  
+  .chat-welcome-content {
+    gap: 1rem;
+  }
+  
+  .chat-input-area {
+    padding: 0.75rem;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .chat-interface-main {
+    padding: 0.75rem;
+  }
+  
+  .chat-welcome-content {
+    gap: 0.75rem;
+  }
+  
+  .chat-input-area {
+    padding: 0.5rem;
+  }
+}
 /* Focus styles for accessibility */
 .focus-visible\:ring-accent\/50:focus-visible {
   ring-color: hsl(var(--accent) / 0.5);

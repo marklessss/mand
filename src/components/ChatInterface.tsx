@@ -51,29 +51,29 @@ export function ChatInterface() {
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-gradient-to-b from-background to-background/95">
+    <div className="flex-1 flex flex-col h-full bg-gradient-to-b from-background to-background/95 min-h-0">
       {/* Main Chat Area */}
-      <div className="flex-1 flex items-center justify-center p-8">
-        <div className="text-center max-w-3xl mx-auto space-y-6">
-          <div className="w-16 h-16 bg-premium-gradient rounded-2xl flex items-center justify-center mx-auto shadow-lg">
+      <div className="flex-1 flex items-center justify-center p-6 min-h-0">
+        <div className="text-center max-w-3xl mx-auto space-y-4">
+          <div className="w-14 h-14 bg-premium-gradient rounded-2xl flex items-center justify-center mx-auto shadow-lg">
             <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </svg>
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-4">
+          <h1 className="text-2xl font-bold text-foreground mb-3">
             How can I help you today?
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base text-muted-foreground">
             Ask me anything, and I'll do my best to provide helpful, accurate responses.
           </p>
         </div>
       </div>
 
       {/* Enhanced Input Area */}
-      <div className="p-6 border-t border-border/50 bg-background/80 backdrop-blur-md">
+      <div className="p-4 border-t border-border/50 bg-background/80 backdrop-blur-md flex-shrink-0">
         <div className="max-w-4xl mx-auto">
           <form onSubmit={handleSubmit} className="relative">
-            <div className="relative bg-background border-2 border-border/50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 focus-within:border-accent/50 focus-within:shadow-xl overflow-hidden">
+            <div className="relative bg-background border-2 border-border/50 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 focus-within:border-accent/50 focus-within:shadow-xl overflow-hidden">
               {/* Textarea */}
               <Textarea
                 ref={textareaRef}
@@ -81,7 +81,7 @@ export function ChatInterface() {
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
                 placeholder="Message ChatGPT..."
-                className="resize-none border-0 bg-transparent px-6 py-4 pr-24 min-h-[60px] max-h-[200px] text-base focus:ring-0 focus-visible:ring-0 placeholder:text-muted-foreground/70 leading-relaxed"
+                className="resize-none border-0 bg-transparent px-4 py-3 pr-20 min-h-[50px] max-h-[150px] text-base focus:ring-0 focus-visible:ring-0 placeholder:text-muted-foreground/70 leading-relaxed"
                 disabled={isLoading}
                 aria-label="Chat message input"
                 rows={1}
@@ -89,23 +89,23 @@ export function ChatInterface() {
               
               {/* Character Counter */}
               {charCount > maxChars * 0.8 && (
-                <div className="absolute bottom-2 left-4 text-xs text-muted-foreground">
+                <div className="absolute bottom-2 left-3 text-xs text-muted-foreground">
                   {charCount}/{maxChars}
                 </div>
               )}
               
               {/* Input Controls */}
-              <div className="absolute right-3 bottom-3 flex items-center gap-2">
+              <div className="absolute right-2 bottom-2 flex items-center gap-1">
                 {/* Attachment Button */}
                 <Button 
                   type="button" 
                   variant="ghost" 
                   size="sm" 
-                  className="w-8 h-8 p-0 text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-all duration-300 rounded-lg"
+                  className="w-7 h-7 p-0 text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-all duration-300 rounded-lg"
                   disabled={isLoading}
                   aria-label="Attach file"
                 >
-                  <Paperclip className="w-4 h-4" />
+                  <Paperclip className="w-3.5 h-3.5" />
                 </Button>
                 
                 {/* Voice Input Button */}
@@ -113,22 +113,22 @@ export function ChatInterface() {
                   type="button" 
                   variant="ghost" 
                   size="sm" 
-                  className="w-8 h-8 p-0 text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-all duration-300 rounded-lg"
+                  className="w-7 h-7 p-0 text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-all duration-300 rounded-lg"
                   disabled={isLoading}
                   aria-label="Voice input"
                 >
-                  <Mic className="w-4 h-4" />
+                  <Mic className="w-3.5 h-3.5" />
                 </Button>
                 
                 {/* Divider */}
-                <div className="w-px h-6 bg-border/50 mx-1"></div>
+                <div className="w-px h-5 bg-border/50 mx-1"></div>
                 
                 {/* Send/Stop Button */}
                 <Button 
                   type={isLoading ? "button" : "submit"}
                   disabled={(!message.trim() && !isLoading) || charCount > maxChars}
                   onClick={isLoading ? () => setIsLoading(false) : undefined}
-                  className={`w-8 h-8 p-0 rounded-lg transition-all duration-300 ${
+                  className={`w-7 h-7 p-0 rounded-lg transition-all duration-300 ${
                     isLoading 
                       ? 'bg-destructive hover:bg-destructive/90 text-destructive-foreground' 
                       : 'bg-foreground text-background hover:bg-foreground/90 disabled:bg-muted disabled:text-muted-foreground'
@@ -138,9 +138,9 @@ export function ChatInterface() {
                   aria-label={isLoading ? "Stop generation" : "Send message"}
                 >
                   {isLoading ? (
-                    <Square className="w-4 h-4" />
+                    <Square className="w-3.5 h-3.5" />
                   ) : (
-                    <ArrowUp className="w-4 h-4" />
+                    <ArrowUp className="w-3.5 h-3.5" />
                   )}
                 </Button>
               </div>
@@ -148,7 +148,7 @@ export function ChatInterface() {
           </form>
           
           {/* Footer Text */}
-          <div className="text-center mt-4">
+          <div className="text-center mt-3">
             <p className="text-xs text-muted-foreground">
               ChatGPT can make mistakes. Check important info. 
               <span className="mx-2">•</span>

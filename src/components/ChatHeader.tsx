@@ -11,14 +11,14 @@ export function ChatHeader({
   sidebarCollapsed
 }: ChatHeaderProps) {
   return (
-    <header className="h-16 border-b border-border/50 bg-background/80 backdrop-blur-md flex items-center justify-between px-6 shadow-sm">
+    <header className="h-14 border-b border-border/50 bg-background/80 backdrop-blur-md flex items-center justify-between px-6 shadow-sm flex-shrink-0">
       <div className="flex items-center gap-4">
         {/* Logo/Brand Area */}
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-premium-gradient rounded-lg flex items-center justify-center shadow-sm">
+          <div className="w-7 h-7 bg-premium-gradient rounded-lg flex items-center justify-center shadow-sm">
             <Sparkles className="w-4 h-4 text-white" />
           </div>
-          <h1 className="text-lg font-semibold text-foreground hidden sm:block">
+          <h1 className="text-base font-semibold text-foreground hidden sm:block">
             ChatGPT
           </h1>
         </div>

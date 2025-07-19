@@ -11,12 +11,12 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="h-screen bg-background flex overflow-hidden">
       {/* Sidebar */}
       <ChatSidebar collapsed={sidebarCollapsed} onToggle={toggleSidebar} />
       
       {/* Main Content */}
-      <div className="flex-1 flex flex-col min-h-screen">
+      <div className="flex-1 flex flex-col h-full min-w-0">
         <ChatHeader onMenuToggle={toggleSidebar} sidebarCollapsed={sidebarCollapsed} />
         <ChatInterface />
       </div>
