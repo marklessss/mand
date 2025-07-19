@@ -34,14 +34,14 @@ export function ChatSidebar({ collapsed, onToggle }: ChatSidebarProps) {
   const [selectedChat, setSelectedChat] = useState<string | null>(null);
 
   return (
-    <div className={`${collapsed ? 'w-0' : 'w-64'} transition-all duration-300 bg-chat-sidebar border-r border-border flex flex-col h-full overflow-hidden`}>
+    <div className={`${collapsed ? 'w-0' : 'w-64'} transition-all duration-300 bg-sidebar-gradient border-r border-sidebar-border flex flex-col h-full overflow-hidden`}>
       {!collapsed && (
         <>
           {/* Header */}
-          <div className="p-4 border-b border-border">
+          <div className="p-4 border-b border-sidebar-border">
             <Button
               variant="outline"
-              className="w-full justify-start gap-3 text-sm font-medium"
+              className="w-full justify-start gap-3 text-sm font-medium bg-sidebar-accent text-sidebar-foreground border-sidebar-border hover:bg-sidebar-accent/80"
               onClick={onToggle}
             >
               <Plus className="w-4 h-4" />
@@ -50,12 +50,12 @@ export function ChatSidebar({ collapsed, onToggle }: ChatSidebarProps) {
           </div>
 
           {/* Search */}
-          <div className="p-3 border-b border-border">
+          <div className="p-3 border-b border-sidebar-border">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-sidebar-foreground/60" />
               <Input
                 placeholder="Search chats"
-                className="pl-10 bg-background border-border text-sm"
+                className="pl-10 bg-sidebar-accent border-sidebar-border text-sm text-sidebar-foreground placeholder:text-sidebar-foreground/50"
               />
             </div>
           </div>
@@ -63,7 +63,7 @@ export function ChatSidebar({ collapsed, onToggle }: ChatSidebarProps) {
           {/* Chat History */}
           <div className="flex-1 overflow-y-auto">
             <div className="p-2">
-              <div className="text-xs font-medium text-muted-foreground px-3 py-2 uppercase tracking-wide">
+              <div className="text-xs font-medium text-sidebar-foreground/70 px-3 py-2 uppercase tracking-wide">
                 Chats
               </div>
               <div className="space-y-1">
@@ -76,8 +76,8 @@ export function ChatSidebar({ collapsed, onToggle }: ChatSidebarProps) {
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <MessageSquare className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-                      <span className="truncate text-foreground">{chat.title}</span>
+                      <MessageSquare className="w-4 h-4 text-sidebar-foreground/60 flex-shrink-0" />
+                      <span className="truncate text-sidebar-foreground">{chat.title}</span>
                     </div>
                   </button>
                 ))}
@@ -86,16 +86,16 @@ export function ChatSidebar({ collapsed, onToggle }: ChatSidebarProps) {
           </div>
 
           {/* User Profile */}
-          <div className="p-3 border-t border-border">
+          <div className="p-3 border-t border-sidebar-border">
             <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-chat-hover transition-colors cursor-pointer">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 bg-premium-gradient rounded-full flex items-center justify-center">
                 <User className="w-4 h-4 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-foreground">Mohd Diab</div>
-                <div className="text-xs text-muted-foreground">Free</div>
+                <div className="text-sm font-medium text-sidebar-foreground">Mohd Diab</div>
+                <div className="text-xs text-sidebar-foreground/60">Free</div>
               </div>
-              <ChevronDown className="w-4 h-4 text-muted-foreground" />
+              <ChevronDown className="w-4 h-4 text-sidebar-foreground/60" />
             </div>
           </div>
         </>

@@ -67,7 +67,8 @@ export default {
 				'chat-active': 'hsl(var(--chat-active))'
 			},
 			backgroundImage: {
-				'premium-gradient': 'var(--premium-gradient)'
+				'premium-gradient': 'var(--premium-gradient)',
+				'sidebar-gradient': 'var(--sidebar-gradient)'
 			},
 			boxShadow: {
 				'chat-sm': 'var(--shadow-sm)',
